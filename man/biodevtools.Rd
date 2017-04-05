@@ -4,7 +4,7 @@
 \name{biodevtools}
 \alias{biodevtools}
 \alias{biodevtools-package}
-\title{Support classes to use bioinformatic tools in R with Docker}
+\title{Support classes to use bioinformatic tools in R using Docker}
 \description{
-Support classes to use bioinformatic tools in R with Docker
+Support classes to use bioinformatic tools in R using Docker
 }
