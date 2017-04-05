@@ -4,7 +4,7 @@ Title: Support classes to use bioinformatic tools in R using Docker
 Version: 0.1.0
 Authors@R: person("Diego", "Diez", email = "diego10ruiz@gmail.com", role = c("aut", "cre"))
 Description: Support classes to use bioinformatic tools in R with Docker.
-Import: R6
+Imports: R6
 License: MIT
 Encoding: UTF-8
 LazyData: true
