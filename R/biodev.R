@@ -19,4 +19,13 @@ biodev <- R6::R6Class("biodev",
       self$homedir <- dir
       self$voldir <- paste0(self$homedir, ":", "/home/biodev")
     }
+  ),
+  private = list(
+    norm_path = function(file, container.dir = "/tmp", bind.dir = ".") {
+      file <- normalizePath(file, mustWork = FALSE)
+      dir <- dirname(file)
+      file <- file.path(container.dir, bind.dir, basename(file))
+      vol <- paste0(dir, ":", file.path(container.dir, bind.dir))
+      list(file = file, volume = vol)
+    }
   ))
