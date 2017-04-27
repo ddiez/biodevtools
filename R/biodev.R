@@ -46,6 +46,16 @@ biodev <- R6::R6Class("biodev",
         digest::sha1(runif(1))
     },
 
+    initialize_container = function(args = "") {
+      args <- paste("run -ti -d --name", self$id, args, self$image, "/bin/bash")
+      system2(self$dockerbin, args)
+    },
+
+    run_container = function(cmd = "", args = "", stdout = FALSE) {
+      args <- paste("exec", self$id, cmd, args, stdout = stdout)
+      system2(self$dockerbin, args, stdout = FALSE)
+    },
+
     clean_container = function() {
       args <- paste("container stop", self$id)
       system2(self$dockerbin, args)
