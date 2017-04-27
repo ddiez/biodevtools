@@ -27,11 +27,7 @@ biodev <- R6::R6Class("biodev",
     finalize = function() {
       # stops container and removes it.
       print("finalizer called")
-      args <- paste("container stop", self$id)
-      system2(self$dockerbin, args)
-
-      args <- paste("container rm", self$id)
-      system2(self$dockerbin, args)
+      private$clean_container()
     }
   ),
   private = list(
@@ -48,5 +44,13 @@ biodev <- R6::R6Class("biodev",
         digest::sha1(seed)
       else
         digest::sha1(runif(1))
+    },
+
+    clean_container = function() {
+      args <- paste("container stop", self$id)
+      system2(self$dockerbin, args)
+
+      args <- paste("container rm", self$id)
+      system2(self$dockerbin, args)
     }
   ))
