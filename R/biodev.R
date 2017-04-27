@@ -9,7 +9,10 @@ biodev <- R6::R6Class("biodev",
     homedir = NULL,
     voldir = NULL,
     dockerbin = "docker",
-    initialize = function(dir = getwd(), docker.path = NULL) {
+    id = NULL,
+    initialize = function(dir = getwd(), docker.path = NULL, seed = NULL) {
+      self$id <- private$unique_id(seed = seed)
+
       if (!is.null(docker.path))
         self$dockerbin = file.path(docker.path, self$dockerbin)
 
@@ -27,5 +30,12 @@ biodev <- R6::R6Class("biodev",
       file <- file.path(container.dir, bind.dir, basename(file))
       vol <- paste0(dir, ":", file.path(container.dir, bind.dir))
       list(file = file, volume = vol)
+    },
+
+    unique_id = function(seed = NULL) {
+      if (! is.null(seed))
+        digest::sha1(seed)
+      else
+        digest::sha1(runif(1))
     }
   ))
