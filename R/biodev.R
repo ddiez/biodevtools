@@ -9,8 +9,10 @@ biodev <- R6::R6Class("biodev",
     homedir = NULL,
     voldir = NULL,
     dockerbin = "docker",
+    image = NULL,
     id = NULL,
-    initialize = function(dir = getwd(), docker.path = NULL, seed = NULL) {
+    initialize = function(image = NULL, dir = getwd(), docker.path = NULL, seed = NULL) {
+      self$image <- image
       self$id <- private$unique_id(seed = seed)
 
       if (!is.null(docker.path))
