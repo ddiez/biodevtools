@@ -21,6 +21,15 @@ biodev <- R6::R6Class("biodev",
 
       self$homedir <- dir
       self$voldir <- paste0(self$homedir, ":", "/home/biodev")
+    },
+    finalize = function() {
+      # stops container and removes it.
+      print("finalizer called")
+      args <- paste("container stop", self$id)
+      system2(self$dockerbin, args)
+
+      args <- paste("container rm", self$id)
+      system2(self$dockerbin, args)
     }
   ),
   private = list(
